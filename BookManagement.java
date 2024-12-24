@@ -60,9 +60,10 @@ public class BookManagement {
             System.out.println("2. View All Books");
             System.out.println("3. Update Book");
             System.out.println("4. Delete Book");
-            System.out.println("5. Sort Books by Name");
-            System.out.println("6. Sort Books by ID");
-            System.out.println("7. Exit");
+            System.out.println("5. Search Book by Name");
+            System.out.println("6. Sort Books by Name");
+            System.out.println("7. Sort Books by ID");
+            System.out.println("8. Exit");
             System.out.print("Enter the Operations: ");
             choice = sc.nextInt();
 
@@ -80,18 +81,21 @@ public class BookManagement {
                     deleteBook(sc);
                     break;
                 case 5:
-                    sortBooksByName();
+                    Serachbook(sc);
                     break;
                 case 6:
-                    sortBooksById();
+                    sortBooksByName();
                     break;
                 case 7:
+                    sortBooksById();
+                    break;
+                case 8:
                     System.out.println(" Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
-        } while (choice != 7);
+        } while (choice != 8);
 
         sc.close();
     }
@@ -156,6 +160,23 @@ public class BookManagement {
             }
         }
         System.out.println("Book not found!");
+    }
+    // Method to search a book by name
+    private static void searchBook(Scanner sc) {
+    	boolean found = false;
+        System.out.print("Enter the name of the book to search: ");
+        String name = sc.nextLine();
+        
+        for (Book book : bookList) {
+            if (book.getName().contains(name)) {
+                System.out.println(book);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No book found with the given name!");
+        }
     }
 
     // Method to sort books by name
